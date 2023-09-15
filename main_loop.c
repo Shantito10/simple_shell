@@ -7,6 +7,9 @@
 void shell_loop(void)
 {
 	char *line = NULL;
+	char **argv = NULL;
+	int i;
+
 	while (1)
 	{
 		/* TODO: */
@@ -30,9 +33,16 @@ void shell_loop(void)
 			break;
 		}
 
-		/* print the line */
-		printf("%s", line);
+		argv = argument_parser(line);
 
+		i = 0;
+		while (argv[i] != NULL)
+		{
+			printf("arg %d: %s\n", i, argv[i]);
+			i++;
+		}
+
+		free(argv);
 		free(line);
 	}
 
