@@ -1,8 +1,4 @@
 #include "main.h"
-#include <string.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 char *shell_read_line(void)
 {
