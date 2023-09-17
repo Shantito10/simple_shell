@@ -36,7 +36,7 @@ void shell_loop(void)
 		argv = argument_parser(line);
 
 		/* pass argument vector to execute the program */
-		launch_command(argv);
+		shell_execute(argv);
 
 		free(argv);
 		free(line);

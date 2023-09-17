@@ -16,6 +16,7 @@ unsigned int _isdelim(char c);
 char **argument_parser(char *line);
 int argument_counter(char *line);
 
-void launch_command(char **argv);
+void shell_execute(char **argv);
+void execute_command(char **argv);
 
 #endif /* MAIN_H */
