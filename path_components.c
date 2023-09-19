@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdlib.h>
 
 char *_getenv(char *env_name)
 {
@@ -15,7 +16,8 @@ char *_getenv(char *env_name)
 		name = strtok(current_env_copy, "=");
 		if (!_strcmp(name, env_name))
 		{
-			values = strtok(NULL, "=");
+			values = _strdup(strtok(NULL, "="));
+
 			free(current_env_copy);
 			return (values);
 		}
@@ -112,6 +114,7 @@ char *_which(char *command_name)
 	size_t full_path_size;
 	struct stat st;
 
+
 	for (index = 0; path_vector[index] != NULL; index++)
 	{
 		current_path = path_vector[index];
@@ -121,6 +124,7 @@ char *_which(char *command_name)
 		full_path = malloc(full_path_size);
 		if (!full_path)
 		{
+			free(pathenv);
 			free(path_vector);
 			return (NULL);
 		}
@@ -132,12 +136,14 @@ char *_which(char *command_name)
 
 		if (stat(full_path, &st) == 0)
 		{
+			free(pathenv);
 			free(path_vector);
 			return (full_path);
 		}
 		free(full_path);
 	}
 
+	free(pathenv);
 	free(path_vector);
 	return (NULL);
 }
