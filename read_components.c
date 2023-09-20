@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * shell_read_line - function entry
+ *
+ * Return: 0, if not line
+ */
 char *shell_read_line(void)
 {
 	char *line = NULL;
@@ -14,6 +19,11 @@ char *shell_read_line(void)
 	return (line);
 }
 
+/**
+ * _isdelim - function entry
+ * @c: char to check
+ * Return: 0
+ */
 unsigned int _isdelim(char c)
 {
 	int delim_index = 0;
@@ -32,6 +42,11 @@ unsigned int _isdelim(char c)
 	return (0);
 }
 
+/**
+ * argument_counter - function entry line
+ * @line: char to check line
+ * Return: 0, or not
+ */
 int argument_counter(char *line)
 {
 	int i = 0;
@@ -55,6 +70,11 @@ int argument_counter(char *line)
 	return (argc);
 }
 
+/**
+ * argument_parser - function entry
+ * @line: char to check line
+ * Return: 0, or argv
+ */
 char **argument_parser(char *line)
 {
 	int argc = argument_counter(line);
