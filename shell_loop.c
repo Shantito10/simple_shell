@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ * shell_loop - Entry point
+ *
+ * Return: no return
+ */
 void shell_loop(void)
 {
 	char *line = NULL;
