@@ -8,7 +8,6 @@ void shell_loop(void)
 {
 	char *line = NULL;
 	char **argv = NULL;
-	int i;
 
 	while (1)
 	{
@@ -33,14 +32,11 @@ void shell_loop(void)
 			break;
 		}
 
+		/* store tokens in argument vector */
 		argv = argument_parser(line);
 
-		i = 0;
-		while (argv[i] != NULL)
-		{
-			printf("arg %d: %s\n", i, argv[i]);
-			i++;
-		}
+		/* pass argument vector to execute the program */
+		shell_execute(argv);
 
 		free(argv);
 		free(line);
