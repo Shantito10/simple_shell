@@ -6,8 +6,8 @@
 #include <unistd.h>
 
 /**
- * shell_execute - checks the shell execute
- * argv: argument count
+ * shell_execute - function for shell execution
+ * @argv: argument vector
  * Return: no return
  */
 void shell_execute(char **argv)
@@ -29,9 +29,10 @@ void shell_execute(char **argv)
 }
 
 /**
- * execute_command - gets the shell command
- * argv: argemunt count
- * Return: no return
+ * execute_command - fuction for command execution
+ * @argv: argument vector
+ *
+ * Return: return nothing
  */
 void execute_command(char **argv)
 {
