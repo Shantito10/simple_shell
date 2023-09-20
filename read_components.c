@@ -7,6 +7,7 @@ char *shell_read_line(void)
 
 	if (getline(&line, &line_buffer_size, stdin) == -1)
 	{
+		free(line);
 		return (NULL);
 	}
 

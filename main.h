@@ -16,7 +16,6 @@
 extern char **environ;
 
 /* main loop */
-
 void shell_loop(void);
 
 /* read components */
