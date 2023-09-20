@@ -1,6 +1,12 @@
 #include "main.h"
 #include <stdlib.h>
 
+/**
+ * _getenv - fuction entry
+ * @env_name: file name
+ *
+ * Return: 0, or NULL
+ */
 char *_getenv(char *env_name)
 {
 	int env_index = 0;
@@ -29,6 +35,11 @@ char *_getenv(char *env_name)
 	return (NULL);
 }
 
+/**
+ * _ispathdelim - fuction path delim
+ * @c: argument count
+ * Return: 0
+ */
 unsigned int _ispathdelim(const char c)
 {
 	int delim_index = 0;
@@ -47,6 +58,11 @@ unsigned int _ispathdelim(const char c)
 	return (0);
 }
 
+/**
+ * path_token_counter - function entry for string path
+ * @path_string: char to path_string
+ * Return: 0, or nothing
+ */
 int path_token_counter(char *path_string)
 {
 	int i = 0;
@@ -71,6 +87,11 @@ int path_token_counter(char *path_string)
 	return (token_count);
 }
 
+/**
+ * path_tokenizer - fuction for string count
+ * @path_string: string
+ * Return: 0, if not NULL
+ */
 char **path_tokenizer(char *path_string)
 {
 	if (path_string)
@@ -104,6 +125,11 @@ char **path_tokenizer(char *path_string)
 	}
 }
 
+/**
+ * _which - fuction for command name
+ * @command_name: argument count
+ * Return: 0, if not NULL
+ */
 char *_which(char *command_name)
 {
 	char *pathenv = _getenv("PATH");
