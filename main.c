@@ -1,8 +1,11 @@
 #include "main.h"
+#include <unistd.h>
 
-int main(void)
+int main(int ac, char **argv)
 {
-	shell_loop();
+	(void)ac;
+	(void)argv;
 
+	shell_loop();
 	return (0);
 }

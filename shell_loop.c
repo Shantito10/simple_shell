@@ -19,7 +19,10 @@ void shell_loop(void)
 		 */
 
 		/* Print the prompt */
-		printf("$ ");
+		if (isatty(STDIN_FILENO))
+		{
+			printf("$ ");
+		}
 
 		/* Get the line */
 		line = shell_read_line();
@@ -28,7 +31,6 @@ void shell_loop(void)
 		if (!line)
 		{
 			/* If so, then an error or EOF was detected */
-			perror("EOF detected");
 			break;
 		}
 
@@ -41,5 +43,4 @@ void shell_loop(void)
 		free(argv);
 		free(line);
 	}
-
 }

@@ -32,14 +32,14 @@ void execute_command(char **argv)
 
 	if (child_pid == -1)
 	{
-		perror("hsh");
+		perror("./hsh");
 	}
 	else if (child_pid == 0)
 	{
 		/* Child process */
 		if (execve(argv[0], argv, environ) == -1)
 		{
-			perror("lsh");
+			perror("./hsh");
 		}
 	}
 	else
