@@ -5,6 +5,11 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+/**
+ * shell_execute - checks the shell execute
+ * argv: argument count
+ * Return: no return
+ */
 void shell_execute(char **argv)
 {
 	if (argv[0] != NULL)
@@ -23,6 +28,11 @@ void shell_execute(char **argv)
 	}
 }
 
+/**
+ * execute_command - gets the shell command
+ * argv: argemunt count
+ * Return: no return
+ */
 void execute_command(char **argv)
 {
 	pid_t child_pid;
