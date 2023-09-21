@@ -1,9 +1,4 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 /**
  * shell_execute - function for shell execution
@@ -17,8 +12,12 @@ int shell_execute(char **argv)
 		return (0);
 	}
 
-	execute_command(argv);
+	if (get_builtin(argv[0]))
+	{
+		return (get_builtin(argv[0])(argv));
+	}
 
+	execute_command(argv);
 	return (0);
 }
 
@@ -67,4 +66,26 @@ void execute_command(char **argv)
 		write(STDERR_FILENO, argv[0], (_strlen(argv[0]) + 1));
 		write(STDERR_FILENO, ": not found\n", 13);
 	}
+}
+
+int (*get_builtin(char *command_name))(char **argv)
+{
+	builtins_t commands[] = {
+		{"exit", shell_exit},
+		{"env", shell_env},
+		{NULL, NULL}
+	};
+	int i = 0;
+
+	while (commands[i].command != NULL)
+	{
+		if (!_strcmp(commands[i].command, command_name))
+		{
+			return (commands[i].builtin_func);
+		}
+
+		i++;
+	}
+
+	return (NULL);
 }
