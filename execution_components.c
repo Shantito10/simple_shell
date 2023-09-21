@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * shell_execute - function for shell execution
@@ -17,8 +18,7 @@ int shell_execute(char **argv)
 		return (get_builtin(argv[0])(argv));
 	}
 
-	execute_command(argv);
-	return (0);
+	return (execute_command(argv));
 }
 
 /**
@@ -27,7 +27,7 @@ int shell_execute(char **argv)
  *
  * Return: return nothing
  */
-void execute_command(char **argv)
+int execute_command(char **argv)
 {
 	pid_t child_pid;
 	int status;
@@ -59,12 +59,15 @@ void execute_command(char **argv)
 			wait(&status);
 		}
 		free(path);
+		return (WEXITSTATUS(status));
 	}
 	else
 	{
 		write(STDERR_FILENO, "./hsh: 1: ", 10);
 		write(STDERR_FILENO, argv[0], (_strlen(argv[0]) + 1));
 		write(STDERR_FILENO, ": not found\n", 13);
+
+		return (127);
 	}
 }
 

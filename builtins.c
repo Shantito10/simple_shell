@@ -6,7 +6,7 @@ int shell_exit(char **argv)
 {
 	(void)argv;
 
-	return (1);
+	return (-1);
 }
 
 int shell_env(char **argv)

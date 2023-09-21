@@ -28,7 +28,7 @@ int argument_counter(char *line);
 
 /* execution components */
 int shell_execute(char **argv);
-void execute_command(char **argv);
+int execute_command(char **argv);
 
 /* built-in struct */
 typedef struct builtins
