@@ -64,8 +64,8 @@ int execute_command(char **argv)
 	else
 	{
 		write(STDERR_FILENO, "./hsh: 1: ", 10);
-		write(STDERR_FILENO, argv[0], (_strlen(argv[0]) + 1));
-		write(STDERR_FILENO, ": not found\n", 13);
+		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+		write(STDERR_FILENO, ": not found\n", 12);
 
 		return (127);
 	}
