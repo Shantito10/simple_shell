@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * _getenv - fuction entry
@@ -144,6 +145,8 @@ char *_which(char *command_name)
 	}
 
 	pathenv = _getenv("PATH");
+	if (!pathenv || !_strcmp(pathenv, ""))
+		return (NULL);
 	path_vector = path_tokenizer(pathenv);
 
 	for (index = 0; path_vector[index] != NULL; index++)
