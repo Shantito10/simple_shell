@@ -10,22 +10,16 @@
  * @argv: argument vector
  * Return: no return
  */
-void shell_execute(char **argv)
+int shell_execute(char **argv)
 {
-	if (argv[0] != NULL)
+	if (argv[0] == NULL)
 	{
-		char *path = _which(argv[0]);
-
-		if (path)
-		{
-			argv[0] = path;
-		}
-		execute_command(argv);
-		if (path)
-		{
-			free(path);
-		}
+		return (0);
 	}
+
+	execute_command(argv);
+
+	return (0);
 }
 
 /**
@@ -38,23 +32,39 @@ void execute_command(char **argv)
 {
 	pid_t child_pid;
 	int status;
+	char *path;
+	char *command = argv[0];
 
-	child_pid = fork();
+	path = _which(command);
 
-	if (child_pid == -1)
+	if (path)
 	{
-		perror("./hsh");
-	}
-	else if (child_pid == 0)
-	{
-		/* Child process */
-		if (execve(argv[0], argv, environ) == -1)
+		argv[0] = path;
+
+		child_pid = fork();
+
+		if (child_pid == -1)
 		{
 			perror("./hsh");
 		}
+		else if (child_pid == 0)
+		{
+			/* Child process */
+			if (execve(argv[0], argv, environ) == -1)
+			{
+				perror("./hsh");
+			}
+		}
+		else
+		{
+			wait(&status);
+		}
+		free(path);
 	}
 	else
 	{
-		wait(&status);
+		write(STDERR_FILENO, "./hsh: 1: ", 10);
+		write(STDERR_FILENO, argv[0], (_strlen(argv[0]) + 1));
+		write(STDERR_FILENO, ": not found\n", 13);
 	}
 }

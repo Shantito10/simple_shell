@@ -13,8 +13,9 @@ void shell_loop(void)
 {
 	char *line = NULL;
 	char **argv = NULL;
+	int exit_status = 0;
 
-	while (1)
+	while (!exit_status)
 	{
 		/* TODO: */
 		/**
@@ -43,7 +44,7 @@ void shell_loop(void)
 		argv = argument_parser(line);
 
 		/* pass argument vector to execute the program */
-		shell_execute(argv);
+		exit_status = shell_execute(argv);
 
 		free(argv);
 		free(line);

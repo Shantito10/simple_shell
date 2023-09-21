@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -132,33 +133,31 @@ char **path_tokenizer(char *path_string)
  */
 char *_which(char *command_name)
 {
-	char *pathenv = _getenv("PATH");
-	char **path_vector = path_tokenizer(pathenv);
+	char *pathenv = NULL;
+	char **path_vector = NULL;
 	char *full_path = NULL;
-	char *current_path = NULL;
-	int index, last_char_idx;
-	size_t full_path_size;
+	int index;
 	struct stat st;
 
+	if (_isapath(command_name))
+	{
+		if (stat(command_name, &st) == 0)
+			return (_strdup(command_name));
+	}
+
+	pathenv = _getenv("PATH");
+	path_vector = path_tokenizer(pathenv);
 
 	for (index = 0; path_vector[index] != NULL; index++)
 	{
-		current_path = path_vector[index];
-		last_char_idx = _strlen(current_path) - 1;
-		full_path_size = _strlen(current_path) + _strlen(command_name) + 2;
+		full_path = _path_join(path_vector[index], command_name);
 
-		full_path = malloc(full_path_size);
 		if (!full_path)
 		{
 			free(pathenv);
 			free(path_vector);
 			return (NULL);
 		}
-
-		_strcpy(full_path, current_path);
-		if (current_path[last_char_idx] != '/')
-			_strcat(full_path, "/");
-		_strcat(full_path, command_name);
 
 		if (stat(full_path, &st) == 0)
 		{

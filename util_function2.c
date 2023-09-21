@@ -34,27 +34,52 @@ void *shl_realloc(void *ptr, size_t ssize)
 	return (new_ptr);
 }
 
-/**
- * main - function entry
- * Return: 0, if not NULL
- */
-int main()
+int _isapath(char *str)
 {
-	int *arr = malloc(5 * sizeof(int));
-	int *new_arr;
-
-	for (int i = 0; i < 5; i++)
+	if (str)
 	{
-		arr[i] = i;
+		int idx = 0;
+
+		while (*(str + idx) != '\0')
+		{
+			if (*(str + idx) == '/')
+			{
+				return (1);
+			}
+
+			idx++;
+		}
 	}
 
-	new_arr = (int *)shl_realloc(arr, 10 * sizeof(int));
-
-	for (int i = 0; i < 10; i++)
-	{
-		printf("%d ", new_arr[i]);
-	}
-
-	free(new_arr);
 	return (0);
+}
+
+char *_path_join(char *path, char *command_name)
+{
+	char *full_path = NULL;
+	size_t full_path_size;
+	int last_char_idx;
+
+	if (path && command_name)
+	{
+
+		last_char_idx = _strlen(path) - 1;
+		full_path_size = _strlen(path) + _strlen(command_name) + 2;
+
+		full_path = malloc(full_path_size);
+
+		if (!full_path)
+		{
+			return (NULL);
+		}
+
+		_strcpy(full_path, path);
+		if (path[last_char_idx] != '/')
+			_strcat(full_path, "/");
+		_strcat(full_path, command_name);
+
+		return (full_path);
+	}
+
+	return (NULL);
 }
