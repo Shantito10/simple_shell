@@ -28,7 +28,11 @@ void shell_loop(void)
 		temp_status = shell_execute(argv);
 
 		if (temp_status == -1)
+		{
+			free(argv);
+			free(line);
 			break;
+		}
 
 		exit_status = temp_status;
 
