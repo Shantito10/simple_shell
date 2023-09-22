@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/**
+ * shell_exit - function shell entry
+ * @argv: argument vector
+ * Return: 0
+ */
 exec_status_t shell_exit(char **argv)
 {
 	exec_status_t res = {1, 0};
@@ -32,6 +37,11 @@ exec_status_t shell_exit(char **argv)
 	return (res);
 }
 
+/**
+ * shell_env - function shell entry
+ * @argv: argument vector
+ * Return: 0
+ */
 exec_status_t shell_env(char **argv)
 {
 	exec_status_t res = {0, 0};

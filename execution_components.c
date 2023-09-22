@@ -73,6 +73,12 @@ exec_status_t execute_command(char **argv)
 	return (res);
 }
 
+/**
+ * get_builtin - function entry
+ * @command_name: name of the command
+ * @argv: char to check
+ * Return: 0, if not NULL
+ */
 exec_status_t (*get_builtin(char *command_name))(char **argv)
 {
 	builtins_t commands[] = {
