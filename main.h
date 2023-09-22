@@ -26,6 +26,12 @@ unsigned int _isdelim(char c);
 char **argument_parser(char *line);
 int argument_counter(char *line);
 
+/**
+ * struct exec_status - function
+ * @_isexit: name of file
+ * @status: check status
+ * Return: 0
+ */
 typedef struct exec_status
 {
 	unsigned int _isexit;
@@ -37,6 +43,12 @@ exec_status_t shell_execute(char **argv);
 exec_status_t execute_command(char **argv);
 
 /* built-in struct */
+/**
+ * struct builtins - function
+ * @command: command name
+ * @builtin_func: builtin function
+ * Return: 0
+ */
 typedef struct builtins
 {
 	char *command;
