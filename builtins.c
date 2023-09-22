@@ -6,10 +6,27 @@
 exec_status_t shell_exit(char **argv)
 {
 	exec_status_t res = {1, 0};
+	int temp;
+
 	if (argv[1])
 	{
-		res.status = atoi(argv[1]);
-		return (res);
+		temp = atoi(argv[1]);
+		if (temp > 0 && temp < 256)
+		{
+			res.status = temp;
+		}
+		else if (temp > 255)
+		{
+			res.status = temp % 256;
+		}
+		else
+		{
+			write(STDERR_FILENO, "./hsh: 1: exit Illegal number: ", 32);
+			write(STDERR_FILENO, argv[1], _strlen(argv[1]));
+			write(STDERR_FILENO, "\n", 1);
+
+			res.status = 2;
+		}
 	}
 
 	return (res);
