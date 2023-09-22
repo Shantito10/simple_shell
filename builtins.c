@@ -1,16 +1,23 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-int shell_exit(char **argv)
+exec_status_t shell_exit(char **argv)
 {
-	(void)argv;
+	exec_status_t res = {1, 0};
+	if (argv[1])
+	{
+		res.status = atoi(argv[1]);
+		return (res);
+	}
 
-	return (-1);
+	return (res);
 }
 
-int shell_env(char **argv)
+exec_status_t shell_env(char **argv)
 {
+	exec_status_t res = {0, 0};
 	int i = 0;
 	(void)argv;
 
@@ -21,5 +28,5 @@ int shell_env(char **argv)
 		i++;
 	}
 
-	return (0);
+	return (res);
 }

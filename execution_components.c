@@ -6,11 +6,13 @@
  * @argv: argument vector
  * Return: no return
  */
-int shell_execute(char **argv)
+exec_status_t shell_execute(char **argv)
 {
+	exec_status_t res = {0, 0};
+
 	if (argv[0] == NULL)
 	{
-		return (0);
+		return (res);
 	}
 
 	if (get_builtin(argv[0]))
@@ -27,8 +29,9 @@ int shell_execute(char **argv)
  *
  * Return: return nothing
  */
-int execute_command(char **argv)
+exec_status_t execute_command(char **argv)
 {
+	exec_status_t res = {0, 0};
 	pid_t child_pid;
 	int status;
 	char *path;
@@ -59,7 +62,8 @@ int execute_command(char **argv)
 			wait(&status);
 		}
 		free(path);
-		return (WEXITSTATUS(status));
+		res.status = WEXITSTATUS(status);
+		return (res);
 	}
 	else
 	{
@@ -67,11 +71,12 @@ int execute_command(char **argv)
 		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 		write(STDERR_FILENO, ": not found\n", 12);
 
-		return (127);
+		res.status = 127;
+		return (res);
 	}
 }
 
-int (*get_builtin(char *command_name))(char **argv)
+exec_status_t (*get_builtin(char *command_name))(char **argv)
 {
 	builtins_t commands[] = {
 		{"exit", shell_exit},

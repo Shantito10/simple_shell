@@ -9,7 +9,8 @@ void shell_loop(void)
 {
 	char *line = NULL;
 	char **argv = NULL;
-	int temp_status, exit_status;
+	exec_status_t execution_status;
+	int exit_status;
 
 	exit_status = 0;
 
@@ -25,16 +26,16 @@ void shell_loop(void)
 
 		argv = argument_parser(line);
 
-		temp_status = shell_execute(argv);
+		execution_status = shell_execute(argv);
 
-		if (temp_status == -1)
+		exit_status = execution_status.status;
+
+		if (execution_status._isexit)
 		{
 			free(argv);
 			free(line);
 			break;
 		}
-
-		exit_status = temp_status;
 
 		free(argv);
 		free(line);

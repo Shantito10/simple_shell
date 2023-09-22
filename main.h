@@ -26,22 +26,28 @@ unsigned int _isdelim(char c);
 char **argument_parser(char *line);
 int argument_counter(char *line);
 
+typedef struct exec_status
+{
+	unsigned int _isexit;
+	int status;
+} exec_status_t;
+
 /* execution components */
-int shell_execute(char **argv);
-int execute_command(char **argv);
+exec_status_t shell_execute(char **argv);
+exec_status_t execute_command(char **argv);
 
 /* built-in struct */
 typedef struct builtins
 {
 	char *command;
-	int (*builtin_func)(char **);
+	exec_status_t (*builtin_func)(char **);
 } builtins_t;
 
-int (*get_builtin(char *command_name))(char **argv);
+exec_status_t (*get_builtin(char *command_name))(char **argv);
 
 /* built-ins */
-int shell_exit(char **argv);
-int shell_env(char **argv);
+exec_status_t shell_exit(char **argv);
+exec_status_t shell_env(char **argv);
 
 /* path components */
 char *_getenv(char *env_name);
