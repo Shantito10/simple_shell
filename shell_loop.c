@@ -28,7 +28,8 @@ void shell_loop(void)
 
 		execution_status = shell_execute(argv);
 
-		exit_status = execution_status.status;
+		if (execution_status.status)
+			exit_status = execution_status.status;
 
 		if (execution_status._isexit)
 		{
