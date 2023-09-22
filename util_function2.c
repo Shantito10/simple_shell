@@ -34,6 +34,11 @@ void *shl_realloc(void *ptr, size_t ssize)
 	return (new_ptr);
 }
 
+/**
+ * _isapath - function entry
+ * @str: string
+ * Return: 0
+ */
 int _isapath(char *str)
 {
 	if (str)
@@ -54,6 +59,12 @@ int _isapath(char *str)
 	return (0);
 }
 
+/**
+ * _path_join - function entry
+ * @path: path
+ * @command_name: name of the command
+ * Return: 0, if not NULL
+ */
 char *_path_join(char *path, char *command_name)
 {
 	char *full_path = NULL;
