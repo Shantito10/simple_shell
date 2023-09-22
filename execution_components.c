@@ -53,9 +53,7 @@ exec_status_t execute_command(char **argv)
 		{
 			/* Child process */
 			if (execve(argv[0], argv, environ) == -1)
-			{
 				perror("./hsh");
-			}
 		}
 		else
 		{
@@ -63,7 +61,6 @@ exec_status_t execute_command(char **argv)
 		}
 		free(path);
 		res.status = WEXITSTATUS(status);
-		return (res);
 	}
 	else
 	{
@@ -72,8 +69,8 @@ exec_status_t execute_command(char **argv)
 		write(STDERR_FILENO, ": not found\n", 12);
 
 		res.status = 127;
-		return (res);
 	}
+	return (res);
 }
 
 exec_status_t (*get_builtin(char *command_name))(char **argv)
