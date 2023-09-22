@@ -26,7 +26,7 @@ exec_status_t shell_exit(char **argv)
 		}
 		else
 		{
-			write(STDERR_FILENO, "./hsh: 1: exit Illegal number: ", 32);
+			write(STDERR_FILENO, "./hsh: 1: exit: illegal number: ", 33);
 			write(STDERR_FILENO, argv[1], _strlen(argv[1]));
 			write(STDERR_FILENO, "\n", 1);
 
