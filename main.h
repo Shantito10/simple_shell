@@ -67,7 +67,14 @@ unsigned int _ispathdelim(const char c);
 int path_token_counter(char *path_string);
 char **path_tokenizer(char *path_string);
 char *_which(char *command_name);
-char *_path_join(char *path, char *command_name);
+
+/* env components */
+int get_env_length(void);
+void free_environ(char **env);
+char *env_join(char *name, char *value);
+
+int _setenv(char *name, char *value, int overwrite);
+int _unsetenv(char *name);
 
 /* utilities */
 int _strlen(char *str);
@@ -76,5 +83,6 @@ char *_strdup(char *str);
 int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
 int _isapath(char *str);
+char *_path_join(char *path, char *command_name);
 
 #endif /* MAIN_H */

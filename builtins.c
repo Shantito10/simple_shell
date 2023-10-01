@@ -48,7 +48,7 @@ exec_status_t shell_env(char **argv)
 	int i = 0;
 	(void)argv;
 
-	while (environ[i])
+	while (environ[i] != NULL)
 	{
 		write(STDOUT_FILENO, environ[i], (_strlen(environ[i]) + 1));
 		write(STDOUT_FILENO, "\n", 1);
