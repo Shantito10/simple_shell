@@ -60,6 +60,8 @@ exec_status_t (*get_builtin(char *command_name))(char **argv);
 /* built-ins */
 exec_status_t shell_exit(char **argv);
 exec_status_t shell_env(char **argv);
+exec_status_t shell_setenv(char **argv);
+exec_status_t shell_unsetenv(char **argv);
 
 /* path components */
 char *_getenv(char *env_name);

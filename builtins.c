@@ -57,3 +57,32 @@ exec_status_t shell_env(char **argv)
 
 	return (res);
 }
+
+exec_status_t shell_setenv(char **argv)
+{
+	exec_status_t res = {0, 0};
+	char *name;
+	char *value;
+
+	if (argv[1] && argv[2])
+	{
+		name = argv[1];
+		value = argv[2];
+
+		_setenv(name, value, 1);
+	}
+
+	return (res);
+}
+
+exec_status_t shell_unsetenv(char **argv)
+{
+	exec_status_t res = {0, 0};
+
+	if (argv[1])
+	{
+		_unsetenv(argv[1]);
+	}
+
+	return (res);
+}

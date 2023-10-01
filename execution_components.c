@@ -83,6 +83,8 @@ exec_status_t (*get_builtin(char *command_name))(char **argv)
 	builtins_t commands[] = {
 		{"exit", shell_exit},
 		{"env", shell_env},
+		{"setenv", shell_setenv},
+		{"unsetenv", shell_unsetenv},
 		{NULL, NULL}
 	};
 	int i = 0;

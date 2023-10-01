@@ -101,29 +101,3 @@ int _unsetenv(char *name)
 	}
 
 }
-
-int main(void)
-{
-	exec_status_t res;
-	char **argv = NULL;
-
-	printf("\n\tOLD ENV\n\n");
-	res = shell_env(argv);
-
-	_setenv("SERGIO", "ramosita", 0);
-
-	printf("\n\tNEW ENV\n\n");
-	res = shell_env(argv);
-
-	_setenv("SERGIO", "aguesito", 1);
-
-	printf("\n\tMOD ENV\n\n");
-	res = shell_env(argv);
-
-	_unsetenv("SERGIO");
-	_unsetenv("LOGNAME");
-	printf("\n\tDELETE ENV\n\n");
-	res = shell_env(argv);
-
-	return (0);
-}
