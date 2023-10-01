@@ -60,7 +60,7 @@ exec_status_t shell_env(char **argv)
 
 exec_status_t shell_setenv(char **argv)
 {
-	exec_status_t res = {0, 0};
+	exec_status_t res = {2, 0};
 	char *name;
 	char *value;
 
@@ -77,7 +77,7 @@ exec_status_t shell_setenv(char **argv)
 
 exec_status_t shell_unsetenv(char **argv)
 {
-	exec_status_t res = {0, 0};
+	exec_status_t res = {2, 0};
 
 	if (argv[1])
 	{

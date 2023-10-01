@@ -50,7 +50,7 @@ int _setenv(char *name, char *value, int overwrite)
 			return (-1);
 		for (env_position = 0; env_position < env_length; env_position++)
 			modified_environ[env_position] = _strdup(environ[env_position]);
-		modified_environ[env_position] = _strdup(new_variable);
+		modified_environ[env_position] = new_variable;
 		modified_environ[++env_position] = NULL;
 		environ = modified_environ;
 		return (0);

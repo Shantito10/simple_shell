@@ -31,15 +31,19 @@ void shell_loop(void)
 		if (execution_status.status)
 			exit_status = execution_status.status;
 
-		if (execution_status._isexit)
+		if (execution_status._isexit == 1)
 		{
 			free(argv);
 			free(line);
+			if (execution_status._isexit == 2)
+				free_environ(environ);
 			break;
 		}
 
 		free(argv);
 		free(line);
+		if (execution_status._isexit == 2)
+			free_environ(environ);
 	}
 
 	exit(exit_status);
