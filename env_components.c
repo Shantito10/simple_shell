@@ -4,6 +4,29 @@
 #include <string.h>
 
 /**
+ * _initenv - initialize the environment variable array
+ *
+ * Return: 0 for success, -1 for failure
+ */
+
+int _initenv(void)
+{
+	int env_length = get_env_length();
+	int env_position = 0;
+	char **modified_environ;
+
+	modified_environ = (char **)malloc(sizeof(char *) * (env_length + 1));
+	if (!modified_environ)
+		return (-1);
+	for (env_position = 0; env_position < env_length; env_position++)
+		modified_environ[env_position] = _strdup(environ[env_position]);
+
+	modified_environ[env_position] = NULL;
+	environ = modified_environ;
+	return (0);
+}
+
+/**
  * _setenv - this function modifies the environment variables
  * by adding a new environment variable or modifying an existing one
  *
@@ -52,6 +75,7 @@ int _setenv(char *name, char *value, int overwrite)
 			modified_environ[env_position] = _strdup(environ[env_position]);
 		modified_environ[env_position] = new_variable;
 		modified_environ[++env_position] = NULL;
+		free_environ(environ);
 		environ = modified_environ;
 		return (0);
 	}
@@ -92,6 +116,7 @@ int _unsetenv(char *name)
 			free(env_var);
 		}
 		modified_environ[new_env_position] = NULL;
+		free_environ(environ);
 		environ = modified_environ;
 		return (0);
 	}

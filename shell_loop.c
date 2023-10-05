@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * shell_loop - Entry point
@@ -13,11 +14,14 @@ void shell_loop(void)
 	int exit_status;
 
 	exit_status = 0;
+	_initenv();
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
+		{
 			printf("$ ");
+		}
 
 		line = shell_read_line();
 
@@ -25,7 +29,6 @@ void shell_loop(void)
 			break;
 
 		argv = argument_parser(line);
-
 		execution_status = shell_execute(argv);
 
 		if (execution_status.status)
@@ -35,16 +38,13 @@ void shell_loop(void)
 		{
 			free(argv);
 			free(line);
-			if (execution_status._isexit == 2)
-				free_environ(environ);
+			free_environ(environ);
 			break;
 		}
 
 		free(argv);
 		free(line);
-		if (execution_status._isexit == 2)
-			free_environ(environ);
 	}
-
+	free_environ(environ);
 	exit(exit_status);
 }

@@ -75,6 +75,7 @@ int get_env_length(void);
 void free_environ(char **env);
 char *env_join(char *name, char *value);
 
+int _initenv(void);
 int _setenv(char *name, char *value, int overwrite);
 int _unsetenv(char *name);
 
